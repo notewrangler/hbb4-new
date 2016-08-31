@@ -1,0 +1,98 @@
+import React from 'react';
+import { Component } from 'react';
+import seriesList from '../data/seriesList';
+
+const styles = {
+	title: {
+		margin: 'auto',
+		textAlign: 'center',
+		background: '#DDD9D9',
+		fontSize: '4em',
+		fontFamily: 'federo',
+		color: 'white',
+		marginTop: '17%',
+		width: '70%',
+		borderRadius: '5px'
+	},
+	bpt: {
+		margin: 'auto'
+	},
+	widget: {
+		marginLeft: '15%',
+		marginTop: '54%',
+		textAlign: 'center',
+		color: 'white'
+	},
+	noWidget: {
+		margin: 'auto',
+		background: '#DDD9D9',
+		color: '#5E5858',
+		marginTop:'40%',
+		textAlign: 'center',
+		width: '70%',
+		borderRadius: '5px'
+	}
+}
+
+class ConcertDetail extends Component {
+
+	render() {
+		const cID = this.props.params.id;
+		let concerti = []
+		let concert = {}
+		concerti = seriesList.filter(function(item){
+			if (item.cid === cID) {
+				return true
+			} else {
+				return false
+			}
+		});
+
+		concert = concerti[0]
+		const imgU = concert.picUrl;
+		const bpthref = `http://www.brownpapertickets.com/event/${concert.bptid}`
+		const script1 = document.createElement("script");
+		const script2 = document.createElement("script");
+		script1.src = `http://www.brownpapertickets.com/eventwidget.js?event=${concert.bptid}&nodescription=true`;
+		script2.src = `http://www.brownpapertickets.com/widget_v651.js?event=${concert.bptid}`;
+
+		document.body.appendChild(script1);
+		document.body.appendChild(script2);
+
+		const stile = {
+			splash: {
+				position: 'fixed',
+				top: 0,
+				width: '100%',
+				backgroundImage: 'url(' + imgU + ')',
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+				backgroundPosition: 'top',
+				margin: 'auto',
+				marginTop: '40px',
+				borderBottom: '4px solid grey',
+				height: '65em',
+				zIndex: '-1'
+			},
+		}
+
+		return (
+			<div>
+				<div style={stile.splash}>
+						<h1 style={styles.title}>{concert.title}</h1>
+				</div>
+						{concert.bptid ?
+							<div id="bpt_eventbody" style={styles.widget}>Brown Paper Tickets Ticket Widget Loading...
+								<a href={bpthref}>Click Here</a> to visit the Brown Paper Tickets event page.
+							</div> : null }
+						{concert.bptid ? null :
+							<div style={styles.noWidget}>
+									<h2>Tickets are not yet available for this concert</h2>
+							</div>
+						}
+			</div>
+		);
+	}
+}
+
+export default ConcertDetail;
