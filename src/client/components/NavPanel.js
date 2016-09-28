@@ -59,9 +59,10 @@ export default class NavPanel extends React.Component {
           onRequestChange={open => this.setState({open})}
         >
 					<MenuItem onClick={this.handleClose}><Link to="/">Home</Link></MenuItem>
-          <MenuItem onClick={this.handleClose}><Link to="series">Concerts</Link></MenuItem>
-					<MenuItem onClick={this.handleClose}><Link to="guests">Guest Artists</Link></MenuItem>
-					<MenuItem onClick={this.handleClose}><Link to="roster">Band Members</Link></MenuItem>
+          <MenuItem onClick={this.handleClose}><Link to="/series">Concerts</Link></MenuItem>
+					<MenuItem onClick={this.handleClose}><Link to="/guests">Guest Artists</Link></MenuItem>
+					<MenuItem onClick={this.handleClose}><Link to="/about-us">About Us</Link></MenuItem>
+
 
         </Drawer>
       </div>

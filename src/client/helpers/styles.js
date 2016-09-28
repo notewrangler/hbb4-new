@@ -1,17 +1,7 @@
 const splashImageUrl = '../img/bucket.jpg';
 const seriesImageUrl = '/img/theater/fort-stage-angle.jpg';
 
-// export const SPLASH_STYLE = {
-// 	position: 'fixed',
-// 	width: '100%',
-// 	backgroundImage: 'url(' + splashImageUrl + ')',
-// 	backgroundRepeat: 'no-repeat',
-// 	backgroundSize: 'cover',
-// 	backgroundPosition: 'top',
-// 	margin: -10,
-// 	height: '65em',
-// 	zIndex: '-2'
-// }
+
 
 const SERIES_HEADER_STYLE = {
 	position: 'relative',
@@ -66,8 +56,8 @@ export const NEXT_CONCERT_PANEL_STYLE = {
 	background: '#F7FFFC',
 	margin: 'auto',
 	backgroundSize: 'cover',
-	marginTop: '70%',
-	height: '32em',
+	marginTop: '60%',
+	height: '90em',
 	borderRadius: '10px'
 }
 
@@ -85,7 +75,7 @@ export const CONCERTS_PANEL_STYLE = {
 	backgroundColor: '#DDD9D9',
 	margin: 'auto',
 	width: '100%',
-	marginTop: 'em',
+	marginBottom: '1em',
 	zIndex: '1'
 
 }

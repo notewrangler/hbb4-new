@@ -6,20 +6,25 @@ import TextField from 'material-ui/TextField';
 import {addContact} from '../api/api'
 
 const ButtonStyle = {
-  position: 'fixed',
-  color: 'white',
-  left: 260,
-  zIndex: 1,
+  backgroundColor: 'white',
+  color: 'black',
+  fontFamily: 'federo',
+  fontSize: '2em',
+  zIndex: 1
+}
+const gotchaStyle = {
+  display: 'none'
 }
 
 export default class Contact extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       open: false,
-      nameVal: 'Name',
-			emailVal: 'Email',
-			messageVal: 'Message'
+      nameVal: '',
+			emailVal: '',
+			messageVal: ''
     };
   }
 
@@ -33,14 +38,22 @@ export default class Contact extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    addContact({
+    let formspreeData = {}
+    formspreeData = {
       name:this.state.nameVal,
       email:this.state.emailVal,
       message:this.state.messageVal
-    }).catch(function(err){
+    }
+
+    addContact(formspreeData).catch(function(err){
       console.log(err);
     });
-    this.setState({open: false});
+    this.setState({
+      nameVal: "",
+      emailVal: "",
+      messageVal: "",
+      open: false
+    });
   }
 
   handleNameChange = (event) => {
@@ -84,36 +97,35 @@ export default class Contact extends React.Component {
           label="Contact Us"
           onClick={this.handleOpen} />
 
-        <Dialog
-          title="Contact Us"
-          actions={actions}
-          modal={true}
-          open={this.state.open}
-        >
-        <form action="http://formspree.io/noiseartist@gmail.com" method="POST">
-				<TextField
-          hintText="Name"
-          floatingLabelText="Name"
-          nameVal={this.state.nameVal}
-          onChange={this.handleNameChange}
-    		/>
-				<TextField
-          hintText="Email"
-          floatingLabelText="Email"
-          emailVal={this.state.emailVal}
-          onChange={this.handleEmailChange}
-    		/>
-        <TextField
-          hintText="Message"
-          floatingLabelText="Message"
-          multiLine={true}
-          rows={2}
-          rowsMax={8}
-          messageVal={this.state.messageVal}
-          onChange={this.handleMessageChange}
-        />
-      <input type="text" name="_gotcha" style={{display:"none"}} />
-        </form>
+          <Dialog
+            title="Contact Us"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+          >
+
+  				<TextField
+            hintText="Name"
+            floatingLabelText="Name"
+            value={this.state.nameVal}
+            onChange={this.handleNameChange}
+      		/>
+  				<TextField
+            hintText="Email"
+            floatingLabelText="Email"
+            value={this.state.emailVal}
+            onChange={this.handleEmailChange}
+      		/>
+          <TextField
+            hintText="Message"
+            floatingLabelText="Message"
+            multiLine={true}
+            rows={2}
+            rowsMax={10}
+            value={this.state.messageVal}
+            onChange={this.handleMessageChange}
+          />
+          <input type="text" name="_gotcha" style={gotchaStyle} />
         </Dialog>
 
       </div>

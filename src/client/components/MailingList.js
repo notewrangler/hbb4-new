@@ -6,17 +6,17 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { stateNames, stateList } from '../helpers/state-names';
 import {addToMailingList} from '../api/api'
 injectTapEventPlugin();
 
+
 const ButtonStyle = {
-  position: 'fixed',
-  color: "white",
-  left: 380,
+  backgroundColor: 'white',
+  color: 'black',
+  fontFamily: 'federo',
+  fontSize: '2em',
   zIndex: 1
 }
-
 
 export default class MailingList extends React.Component {
   constructor(props) {
@@ -28,8 +28,7 @@ export default class MailingList extends React.Component {
       lnameVal: '',
       streetVal: '',
 			cityVal: '',
-			stateVal: 14,
-      stateListName: '',
+			stateVal: '',
 			zipVal: '',
 			phoneVal: ''
     };
@@ -37,23 +36,34 @@ export default class MailingList extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    addToMailingList({
-        "email_address": this.state.emailVal,
-        "status": "subscribed",
-        "merge_fields": {
-          "FNAME": this.state.fnameVal,
-          "LNAME": this.state.lnameVal,
-          "STREET1": this.state.streetVal,
-          "CITY": this.state.cityVal,
-          "STATE": this.state.stateListName,
-          "POSTALCODE": this.state.zipVal,
-          "PNONENUM": this.state.phoneVal
-        }
-    }).catch(function(err){
-      console.log(err);
-    });
+      let postData = ({
+          "email_address": this.state.emailVal,
+          "email_type": "html",
+          "status": "pending",
+          "merge_fields": {
+            "FNAME": this.state.fnameVal,
+            "LNAME": this.state.lnameVal,
+            "STREET1": this.state.streetVal,
+            "CITY": this.state.cityVal,
+            "STATE": this.state.stateVal,
+            "POSTALCODE": this.state.zipVal,
+            "PNONENUM": this.state.phoneVal
+          },
+          "vip": false
+        });
+    addToMailingList(postData);
 
-    this.setState({open: false});
+    this.setState({
+      emailVal: '',
+      fnameVal: '',
+      lnameVal: '',
+      streetVal: '',
+      cityVal: '',
+      stateVal: '',
+      zipVal: '',
+      phoneVal: '',
+      open: false
+    });
   }
 
   handleOpen = () => {
@@ -89,19 +99,9 @@ export default class MailingList extends React.Component {
 				cityVal: event.target.value
 			});
 	};
-	handleStatesChange = (event, index, value) => {
-    this.setState({stateVal: value});
-    let st = '';
-    st = stateList.filter((stat) =>{
-      if (stat.id == this.state.stateVal) {
-        return true
-      } else {
-        return false
-      }
-    });
-
-    this.setState({stateListName: st[0].name})
-
+	handleStatesChange = (event) => {
+    this.setState({
+      stateVal: event.target.value});
     };
 
 	handleZipChange = (event) => {
@@ -143,6 +143,7 @@ export default class MailingList extends React.Component {
           modal={true}
           open={this.state.open}
         >
+
         <TextField
           hintText="Email"
           floatingLabelText="Email"
@@ -173,15 +174,13 @@ export default class MailingList extends React.Component {
 				  value={this.state.cityVal}
           onChange={this.handleCityChange}
         />
-			<SelectField
+			<TextField
 					hintText="State"
 					floatingLabelText="State"
-          maxHeight={300}
 					value={this.state.stateVal}
 					onChange={this.handleStatesChange}
-				>
-        {stateNames}
-			 </SelectField>
+
+			 />
 				<TextField
 					hintText="Zip"
 					floatingLabelText="Zip"
@@ -200,17 +199,3 @@ export default class MailingList extends React.Component {
     );
   }
 }
-
-
-// {
-//     "email_address": this.state.emailVal,
-//     "status": "subscribed",
-//     "merge_fields": {
-//       "FNAME": this.state.fnameVal,
-//       "LNAME": this.state.lnameVal,
-//       "STREET1": this.state.streetVal,
-//       "CITY": this.state.cityVal,
-//       "STATE": this.state.stateVal,
-//       "POSTALCODE": this.state.zipVal,
-//       "PNONENUM": this.state.phoneVal
-//     }

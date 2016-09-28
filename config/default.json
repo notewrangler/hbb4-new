@@ -4,5 +4,8 @@
   },
   "api": {
     "port":8001
-  }
+  },
+
+	"mKey": "apikey fad588464de0404e0f91d18c83ba0bd6-us8"
+  
 }

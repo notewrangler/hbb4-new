@@ -2,13 +2,12 @@ import React from 'react';
 import { Component } from 'react';
 import { Link } from 'react-router';
 import  GuestArtists  from '../data/guests';
-import {GridList, GridTile} from 'material-ui/GridList';
+import {GridTile} from 'material-ui/GridList';
 import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
 
 
 
-const guestImageUrl = '/img/guests/unsplash/solo-spot.jpeg';
+const guestImageUrl = '../../img/unsplash/solo-spot.jpeg';
 
 const styles = {
 	splash: {
@@ -22,6 +21,15 @@ const styles = {
 		backgroundPosition: 'top',
 		height: '70em',
 		zIndex: '-1'
+	},
+	photoCredit: {
+		position: 'fixed',
+		right: 0,
+		top: 60,
+		color: '#CCCCCC'
+	},
+	titleBlock: {
+		marginBottom: '22%'
 	},
 	title: {
 		margin: 'auto',
@@ -40,53 +48,77 @@ const styles = {
 		color: '#85EAF2',
 		zIndex: '-1'
 	},
-	root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
-  },
-  gridList: {
-    width: '100%',
-    height: 2000,
-    overflowY: 'auto',
-    marginTop: 250
-  },
+	gridTile: {
+		margin: 0,
+		padding: 0,
+		width: '100%',
+		height: 500
+	},
+	gridBody: {
+		marginBottom: '6%'
+	}
 }
 
-const PictureGrid = () => (
-  <div style={styles.root}>
-    <GridList
-      cellHeight={500}
-			cols={3}
-      style={styles.gridList}
-    >
-      <Subheader></Subheader>
-      {GuestArtists.map((tile) => (
-        <GridTile
-          key={tile.gid}
-          title={tile.name}
-					subtitle={<span>{tile.date}--{tile.concert}</span>}
-          actionIcon={<Link to={`guest-detail/${tile.gid}`}><RaisedButton label="Bio" primary={true}></RaisedButton></Link>}
-        >
-          <img src={tile.photoUrl} />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>
-);
+
+class PhotoGrid extends Component {
+	constructor(props){
+		super(props)
+	}
+
+ 	render() {
+		var newBlock = []
+		var makeRows = (guestList) => {
+			var gList = guestList
+				if (gList.length > 0) {
+					var guestChunk = gList.splice(0,3)
+					newBlock.push(guestChunk);
+					return makeRows(gList);
+				} else {
+					return newBlock;
+				}
+			};
+
+		var newRows = makeRows(GuestArtists)
+
+		return (
+			<div className="container" style={styles.gridBody}>
+				{newRows.map(function(blockRow){
+					return <div className="row" key={blockRow[0].gid}>
+     					{blockRow.map(function(tile){
+								return (
+									<div className="col-md-4" key={tile.gid}>
+									<GridTile
+										style={styles.gridTile}
+										title={tile.name}
+										subtitle={<span>{tile.date}--{tile.concert}</span>}
+										actionIcon={<Link to={`guest-detail/${tile.gid}`}><RaisedButton label="Bio" primary={true}></RaisedButton></Link>}
+									>
+										<img src={tile.photoUrl} />
+									</GridTile>
+									</div>
+								)
+							})}
+     			</div>
+					})}
+			</div>
+
+		)
+	}
+}
 
 class Guests extends Component {
   render() {
     return (
-			<div>
+			<div className="container-fluid">
 				<div style={styles.splash}>
+					<p style={styles.photoCredit}>Photo Credit: <a href="https://unsplash.com/@devilcoders">Alexey Topolyanskiy</a></p>
     		</div>
-				<div>
+				<div style={styles.titleBlock}>
 					<h2 style={styles.title}>Heartland Big Band</h2>
 					<h1 style={styles.subtitle}>Special Guests</h1>
 				</div>
-					<PictureGrid />
-  		</div>
+    			<PhotoGrid />
+    	</div>
 
     );
   }
@@ -95,4 +127,4 @@ class Guests extends Component {
 export default Guests;
 
 
-// https://unsplash.com/@devilcoders Alexey Topolyanskiy}
+//  }

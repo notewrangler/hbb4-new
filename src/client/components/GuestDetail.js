@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import Guests from '../data/guests';
 
-const bkgPhotoUrl = "../img/guests/unsplash/dark-stage-copy.jpg"
+const bkgPhotoUrl = "../../img/guests/dark-stage-copy.jpg"
 
 const styles = {
 	splash: {
@@ -18,8 +18,8 @@ const styles = {
 		zIndex: '-1'
 	},
 	photo: {
-		minWidth: "60%",
-		maxWidth: "90%",
+		minWidth: "70%",
+		maxWidth: "95%",
 		marginTop: "15%"
 	},
 	blurb: {

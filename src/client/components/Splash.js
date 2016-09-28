@@ -1,8 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
-import { TITLE_STYLE, SUBTITLE_STYLE, TITLE_BLOCK_STYLE, SLOGAN_STYLE } from '../helpers/styles';
 
-const splashImageUrl = '../img/bucket.jpg';
+const splashImageUrl = 'img/bucket.jpg';
+
 const styles = {
   splash: {
     position: 'fixed',
@@ -12,20 +12,42 @@ const styles = {
   	backgroundSize: 'cover',
   	backgroundPosition: 'top',
   	margin: -10,
-  	height: '65em',
+  	height: '70em',
   	zIndex: '-2'
+  },
+  titleBlock: {
+    fontFamily: 'Federo',
+    marginLeft: '54%'
+  },
+  title: {
+    paddingTop: '3em',
+  	paddingBottom: '0em',
+  	fontSize: '6em',
+  	fontWeight: 'bold',
+  	color: '#725F5F'
+  },
+  subtitle: {
+    marginLeft: '1em',
+  	marginTop: '0em',
+  	paddingTop: '0em',
+  	letterSpacing: '1px',
+  	fontSize: '5em',
+  	fontWeight: 'bold',
+  	color: '#725F5F'
+  },
+  slogan: {
+  	fontSize: '2em',
+  	fontWeight: 'bold',
+  	paddingTop: '0.5em',
+  	color: "#169692"
   }
 }
 
 class Splash extends Component {
   render() {
     return (
-      <div style={styles.splash}>
-        <div style={TITLE_BLOCK_STYLE}>
-          <h1 style={TITLE_STYLE}>Heartland</h1>
-          <h3 style={SUBTITLE_STYLE}>Big Band</h3>
-          <h4 style={SLOGAN_STYLE}>Indiana's Premier Big Band Concert Experience</h4>
-        </div>
+      <div className="container-fluid" style={styles.splash}>
+
       </div>
     );
   }

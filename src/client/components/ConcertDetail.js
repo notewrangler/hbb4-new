@@ -2,15 +2,17 @@ import React from 'react';
 import { Component } from 'react';
 import seriesList from '../data/seriesList';
 
+
+
 const styles = {
-	title: {
+		title: {
 		margin: 'auto',
 		textAlign: 'center',
 		background: '#DDD9D9',
 		fontSize: '4em',
 		fontFamily: 'federo',
 		color: 'white',
-		marginTop: '17%',
+		marginTop: '7%',
 		width: '70%',
 		borderRadius: '5px'
 	},
@@ -19,7 +21,8 @@ const styles = {
 	},
 	widget: {
 		marginLeft: '15%',
-		marginTop: '54%',
+		marginTop: '15%',
+		marginBottom: '5%',
 		textAlign: 'center',
 		color: 'white'
 	},
@@ -28,6 +31,7 @@ const styles = {
 		background: '#DDD9D9',
 		color: '#5E5858',
 		marginTop:'40%',
+		marginBottom: '20%',
 		textAlign: 'center',
 		width: '70%',
 		borderRadius: '5px'
@@ -49,7 +53,7 @@ class ConcertDetail extends Component {
 		});
 
 		concert = concerti[0]
-		const imgU = concert.picUrl;
+		const concertImg = concert.picUrl
 		const bpthref = `http://www.brownpapertickets.com/event/${concert.bptid}`
 		const script1 = document.createElement("script");
 		const script2 = document.createElement("script");
@@ -59,29 +63,27 @@ class ConcertDetail extends Component {
 		document.body.appendChild(script1);
 		document.body.appendChild(script2);
 
-		const stile = {
-			splash: {
-				position: 'fixed',
-				top: 0,
-				width: '100%',
-				backgroundImage: 'url(' + imgU + ')',
-				backgroundRepeat: 'no-repeat',
-				backgroundSize: 'cover',
-				backgroundPosition: 'top',
-				margin: 'auto',
-				marginTop: '40px',
-				borderBottom: '4px solid grey',
-				height: '65em',
-				zIndex: '-1'
-			},
+		const splashStyle = {
+			position: 'fixed',
+			top: 0,
+			width: '100%',
+			backgroundImage: 'url(' + concertImg + ')',
+			backgroundRepeat: 'no-repeat',
+			backgroundSize: 'cover',
+			backgroundPosition: 'top',
+			margin: 'auto',
+			marginTop: '40px',
+			height: '65em',
+			zIndex: '-1'
 		}
 
 		return (
 			<div>
-				<div style={stile.splash}>
-						<h1 style={styles.title}>{concert.title}</h1>
+				<div style={splashStyle}>
+					<h1 style={styles.title}>{concert.title}</h1>
 				</div>
-						{concert.bptid ?
+				<div>
+					{concert.bptid ?
 							<div id="bpt_eventbody" style={styles.widget}>Brown Paper Tickets Ticket Widget Loading...
 								<a href={bpthref}>Click Here</a> to visit the Brown Paper Tickets event page.
 							</div> : null }
@@ -90,6 +92,7 @@ class ConcertDetail extends Component {
 									<h2>Tickets are not yet available for this concert</h2>
 							</div>
 						}
+				</div>
 			</div>
 		);
 	}
