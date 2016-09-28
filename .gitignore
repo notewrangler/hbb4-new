@@ -3,5 +3,5 @@ bundle*
 dist
 config
 src/server/memberPortal/files
-src/client/img
+src/img
 .DS_Store

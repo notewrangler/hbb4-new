@@ -194,6 +194,20 @@ const GuestArtists = [
 		photoUrl: '../../img/guests/keith_connor.jpg',
 		detailPhotoUrl: "../../img/guests/keith_connor_1.jpg",
 		content:[]
+	},
+	{
+		gid: "13",
+		name: "Chooch Kennedy",
+		instrument: "Featured Vocalist",
+		previous: null,
+		concert: "POP! Goes the Big Band",
+		date: "February 10 & 11, 2017",
+		photoUrl: "../../img/guests/chooch_kennedy.png",
+		detailPhotoUrl: "../../img/guests/choochintux.jpg"
+		content: [
+			"Chooch Kennedy has 35 years in the music business with his soulful singing style and entertainment skills.  Chooch has shared concert billings with Pure Prairie League, Jay Leno, Steppenwolf, Tammy Wynette, Lyle Lovett and others.  He has played scores of festivals, club dates and private parties ranging from 50 guests to over 10,000 for all ages.  He has performed in Las Vegas and is a successful commercial jingle singer with national accounts and awards to his credit. Chooch is also a featured performer on radio and numerous CD's for the nationally syndicated 'Bob and Tom Show.'  ",
+			"Versatility best describes the music he performs which can range from a full blown horn ensemble to a duet, singing standards,rock, soul, ballads, ethnic, and country flavors. The results are always dancing, pure fun and return engagements.  Clients, such as, Eli Lilly Company, GTE, McMillan Publishing, Marsh Supermarkets, Dreyer and Reinbold Racing, Builders Association of Greater Indianapolis, Argossy Casino, United States Olympic Swimming Team, Bryant Corporation, St. Elmo Steak House, and, The Indiana Pacers will attest to the unparalleled musicianship and ability to win over audiences of widely varied ages and musical tastes."
+		]
 	}
 ]
 
